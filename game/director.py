@@ -1,6 +1,6 @@
 from game.console import Console
-from game.hunter import Hunter
-from game.rabbit import Rabbit
+from game.jumper import Jumper
+from game.word import Word
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
@@ -66,6 +66,6 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        hint = self.rabbit.get_hint()
-        self.console.write(hint)
-        self.keep_playing = (self.rabbit.distance[-1] != 0)
+        board = self.jumper.get_board()
+        self.console.write(board)
+        self.keep_playing = (self.word.keep_playing())
