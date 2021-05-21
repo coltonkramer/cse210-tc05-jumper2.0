@@ -1,6 +1,6 @@
 from game.console import Console
-from game.hunter import Hunter
-from game.rabbit import Rabbit
+from game.word import Word
+from game.jumper import Jumper
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
