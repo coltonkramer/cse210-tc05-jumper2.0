@@ -1,8 +1,23 @@
 import random
 
 class Word:
+    """Controls the mechanics of the word in the game. Chooses the word, checks 
+       if the guess is correct, and checks if you can keep playing.
+    
+    Stereotype:
+        Game logic
+
+    Attributes:
+        word (Word): An instance of the class of objects known as Word.
+    """
 
     def __init__(self):
+        """The class constructor.
+        
+        Args:
+            self (Word): an instance of Word.
+        """
+
         self.word = "hello"
         self.list_word = []
         self.show_guess = ""
@@ -42,7 +57,7 @@ class Word:
 
 
     def keep_playing(self):
-        
+        """ This function checks to see if the player can contine the game"""
         if(self.wrong_guesses == 0):
             return(False)
         elif(self.word == self.show_guess):
