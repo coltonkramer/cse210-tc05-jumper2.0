@@ -33,6 +33,10 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        #The two line below make it so the player see's what they are originally working with.
+        self.word.update_word()
+        self.do_outputs()
+
         while self.keep_playing:
             self.get_inputs()
             self.do_updates()
@@ -40,15 +44,16 @@ class Director:
 
     def get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
-        that means getting  to a new location.
+        that means setting up the board.
 
         Args:
             self (Director): An instance of Director.
         """
-        board = self.jumper.get_board()
-        self.console.write(message)
-        letter = self.console.read("Guess a letter [a-z]:")
-        self.word.replace(letter)
+        #self.console.write(self.word.show_guess)
+        #board = self.jumper.get_board()
+        #self.console.write(board)
+        letter = self.console.read("Guess a letter [a-z]: ")
+        self.word.guessed_letter(letter)
         
     def do_updates(self):
         """Updates the important game information for each round of play. In 
@@ -57,7 +62,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self.word.update_guess(self.jumper.letter)
+        self.jumper.remove_pieces(self.word.wrong_guesses)
         
     def do_outputs(self):
         """Outputs the important game information for each round of play. In 
@@ -66,6 +71,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+        self.console.write(self.word.show_guess)
         board = self.jumper.get_board()
         self.console.write(board)
         self.keep_playing = (self.word.keep_playing())

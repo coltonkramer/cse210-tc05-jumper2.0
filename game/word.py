@@ -3,10 +3,10 @@ import random
 class Word:
 
     def __init__(self):
-        word = "hello"
-        list_word = []
-        show_guess = ""
-        wrong_guesses = 4
+        self.word = "hello"
+        self.list_word = []
+        self.show_guess = ""
+        self.wrong_guesses = 4
 
     def update_word(self):
         """This class chooses a word for the game and then makes the the tiles."""
@@ -26,27 +26,26 @@ class Word:
 
     def guessed_letter(self, letter):
         """This function looks through each of the letters for the user's inputted letter to check if it needs to replace any of the letters in the displayed word"""
-        wrong = 1
-        correct_guess = True
+        wrong = 0
+        self.show_guess = ""
 
         for x in range(0, len(self.word)):
             if letter == self.word[x]:
-                if correct_guess:
-                    self.show_guess = ""
-                    correct_guess = False
                 self.list_word[x] = letter
                 self.show_guess = self.show_guess + self.list_word[x]
             else:
                 wrong += 1
                 self.show_guess = self.show_guess + self.list_word[x]
 
-            if(wrong == len(self.word)):
-                self.wrong_guesses = self.wrong_guesses -1
+        if(wrong == len(self.word)):
+            self.wrong_guesses = self.wrong_guesses -1
 
 
     def keep_playing(self):
         
         if(self.wrong_guesses == 0):
+            return(False)
+        elif(self.word == self.show_guess):
             return(False)
         else:
             return(True)
