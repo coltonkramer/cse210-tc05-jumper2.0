@@ -1,4 +1,5 @@
 import random
+import csv
 
 class Word:
     """Controls the mechanics of the word in the game. Chooses the word, checks 
@@ -22,16 +23,21 @@ class Word:
         self.list_word = []
         self.show_guess = ""
         self.wrong_guesses = 4
+        self.list = []
 
     def update_word(self):
         """This class chooses a word for the game and then makes the the tiles."""
-        val = random.randint(1,3)
-        if val == 1:
-            self.word = "chicken"
-        elif val == 2:
-            self.word = "flag"
-        elif val == 3:
-            self.word = "pikachu"
+        val = random.randint(1,10000)
+
+        with open('Words.csv') as words:
+        
+            for i in words:
+                i = i.strip()
+                # self.word = i.split(',')
+                self.list.append(i)
+            
+            self.word = self.list[val]
+
 
         #use the code below to also update when the player chooses a correct guess
         for x in range(0, len(self.word)):
@@ -59,6 +65,7 @@ class Word:
     def keep_playing(self):
         """ This function checks to see if the player can contine the game"""
         if(self.wrong_guesses == 0):
+            print('The correct answer is: '+ self.word.capitalize())
             return(False)
         elif(self.word == self.show_guess):
             return(False)
